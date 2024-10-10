@@ -1,0 +1,23 @@
+.botaomenu {
+text-decoration:none;
+color: #c8d6e5;
+}
+
+.sair {
+position: absolute;
+top: 10px;
+right:10px;
+}
+
+.botao {
+margin: 10px;
+}
+
+body {
+    background-image: url("/img/senha.jpg");
+    background-size: cover;
+}
+
+.white {
+color: white;
+}

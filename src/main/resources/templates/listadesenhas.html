@@ -1,0 +1,103 @@
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="fragments/botoes :: botoes(~{::title}, ~{::#content})">>
+<title>Lista de senhas</title>
+
+<div th:replace="fragments/botoes :: botoes"></div>
+
+<div id="content" >
+
+    <div class="row g-3 position-absolute top-50 start-50 translate-middle">
+        <table class="m-5">
+            <thead>
+            <th class="white">Email</th>
+            <th class="white">Local</th>
+            <th class="white">Senha</th>
+            </thead>
+            <tbody>
+            <tr th:each="senha : ${senhas}">
+                <td class="white" th:text="${senha.email}"> </td>
+                <td class="white" th:text="${senha.local}"> </td>
+                <td class="white" th:text="${senha.senha}"> </td>
+                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#alterarModal' + ${senha.id}">
+                    ✏️
+                </button> </td>
+                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#deletarModal' + ${senha.id}">
+                    🗑️
+                </button> </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div th:each="senha : ${senhas}">
+        <div class="modal fade" th:id="'alterarModal' + ${senha.id}" tabindex="-1" aria-labelledby="altModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="alterarModalLabel">Alterar ✏️</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" th:action="@{/alterarsenha}"  >
+                            <input type="text" id="id" name="id" th:value="${senha.id}" hidden="true" />
+                            <div>
+                                <label for="email">E-mail:</label>
+                                <input type="text" id="email" name="email" th:value="${senha.email}"/>
+                            </div>
+                            <div>
+                                <label for="local">local:</label>
+                                <input type="text" id="local" name="local" th:value="${senha.local}" />
+
+                            </div>
+                            <div>
+                                <label for="senha">Senha:</label>
+                                <input id="senha" name="senha" th:value="${senha.senha}" />
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:each="senha : ${senhas}">
+        <div class="modal fade" th:id="'deletarModal' + ${senha.id}" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Deletar 🗑️</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" th:action="@{/deletarsenha}">
+                            <div>
+                                <input type="text" id="iddelete" name="iddelete" th:value="${senha.id}" hidden="true" />
+                                <h3>Tem certeza que deseja deletar essa senha? </h3>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>

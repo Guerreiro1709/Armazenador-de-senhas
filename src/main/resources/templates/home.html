@@ -1,0 +1,27 @@
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="fragments/botoes :: botoes(~{::title}, ~{::#content})">>
+<title>Home</title>
+
+<div th:replace="fragments/botoes :: botoes"></div>
+
+<div id="content" class="row g-3 position-absolute top-50 start-50 translate-middle">
+
+    <form method="post" th:action="@{/criarsenha}"  >
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email" />
+        </div>
+        <div>
+            <label for="local">local:</label>
+            <input type="text" id="local" name="local" />
+        </div>
+        <div>
+            <label for="senha">Senha:</label>
+            <input id="senha" name="senha" />
+        </div>
+
+        <button>
+            salvar senha
+        </button>
+    </form>
+</div>
